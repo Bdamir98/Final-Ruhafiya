@@ -1,0 +1,22 @@
+dist/
+node_modules/
+.wrangler/
+.dev.vars
+worker-configuration.d.ts
+.next/
+.vercel/
+.turbo/
+.cache/
+coverage/
+*.log
+.DS_Store
+
+# Env files
+.env
+.env.local
+.env.*
+!.env.example
+
+# DB schemas and migrations (avoid committing sensitive SQL)
+supabase/
+migrations/
