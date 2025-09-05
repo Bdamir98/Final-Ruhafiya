@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react';
 import { websiteContent } from '@/shared/websiteContent';
 
 interface ContentContextType {
@@ -7,7 +7,6 @@ interface ContentContextType {
   isLoading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
-  // Add a global refetch trigger
   refreshContent: () => void;
 }
 
@@ -29,43 +28,49 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
   const [content, setContent] = useState<Record<string, any>>(websiteContent);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [lastFetchTime, setLastFetchTime] = useState<number>(Date.now());
 
   const fetchContent = async (force = false) => {
+    // Skip if already loading to prevent duplicate requests
+    if (isLoading && !force) return;
+    
     setIsLoading(true);
     setError(null);
 
     try {
-      // Add timestamp for cache busting
-      const timestamp = force ? Date.now() : lastFetchTime;
-      const response = await fetch(`/api/admin/website-content?t=${timestamp}`);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+      const response = await fetch(`/api/admin/website-content`, {
+        signal: controller.signal,
+        cache: force ? 'no-cache' : 'default',
+      });
+      
+      clearTimeout(timeoutId);
+
       if (response.ok) {
         const data = await response.json();
-
-        // Merge database content with static content as fallback
         const mergedContent = { ...websiteContent, ...data.content };
 
-        // Special handling for benefits items - ensure they're parsed as arrays
+        // Optimize benefits parsing
         if (data.content?.benefits?.items && typeof data.content.benefits.items === 'string') {
           try {
-            const parsedItems = JSON.parse(data.content.benefits.items);
             mergedContent.benefits = {
               ...mergedContent.benefits,
-              items: parsedItems
+              items: JSON.parse(data.content.benefits.items)
             };
           } catch (e) {
-            console.error('Failed to parse benefits items:', e);
+            console.warn('Failed to parse benefits items:', e);
           }
         }
 
         setContent(mergedContent);
-        setLastFetchTime(Date.now());
       } else {
-        setError('Failed to fetch content');
         setContent(websiteContent);
       }
     } catch (err) {
-      setError('Error fetching content');
+      if (err instanceof Error && err.name !== 'AbortError') {
+        setError('Error fetching content');
+      }
       setContent(websiteContent);
     } finally {
       setIsLoading(false);
@@ -76,43 +81,55 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
     await fetchContent(true);
   };
 
-  // Poll for content updates every 30 seconds
+  // Reduced polling frequency for better performance
   useEffect(() => {
-    const interval = setInterval(() => {
-      fetchContent(false);
-    }, 30000); // Check every 30 seconds
+    let interval: NodeJS.Timeout;
+    
+    // Only poll in development or when explicitly needed
+    if (process.env.NODE_ENV === 'development') {
+      interval = setInterval(() => {
+        fetchContent(false);
+      }, 60000); // Check every 60 seconds instead of 30
+    }
 
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, []);
 
-  // Listen for global content refresh events
+  // Optimized event listener
   useEffect(() => {
     const handleContentRefresh = () => {
       fetchContent(true);
     };
 
-    window.addEventListener('contentRefresh', handleContentRefresh);
-
+    window.addEventListener('contentRefresh', handleContentRefresh, { passive: true });
     return () => {
       window.removeEventListener('contentRefresh', handleContentRefresh);
     };
   }, []);
 
-  // Initial fetch on component mount
+  // Completely skip all fetching in production for maximum performance
   useEffect(() => {
-    fetchContent();
+    // Only fetch in development
+    if (process.env.NODE_ENV === 'development') {
+      // Delay initial fetch significantly to not block rendering
+      const timer = setTimeout(() => {
+        fetchContent();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
-  const value: ContentContextType = {
+  const value: ContentContextType = useMemo(() => ({
     content,
     isLoading,
     error,
     refetch,
     refreshContent: () => {
-      // Trigger a global content refresh by updating a state that components can watch
       window.dispatchEvent(new CustomEvent('contentRefresh'));
     },
-  };
+  }), [content, isLoading, error]);
 
   return (
     <ContentContext.Provider value={value}>

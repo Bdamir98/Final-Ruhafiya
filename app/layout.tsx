@@ -2,23 +2,169 @@ import './globals.css';
 import type { ReactNode } from 'react';
 import { Hind_Siliguri } from 'next/font/google';
 import Script from 'next/script';
-import AlertDialog from '../src/react-app/components/AlertDialog';
+import { Suspense } from 'react';
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ['latin', 'bengali'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '600'],
   variable: '--font-hind-siliguri',
   display: 'swap',
+  preload: true,
 });
+
+export const metadata = {
+  title: 'রুহাফিয়া - পেইন রিমুভ অয়েল | ১৫-২০ দিনে ব্যথা থেকে মুক্তি',
+  description: 'রুহাফিয়া পেইন রিমুভ অয়েল। জয়েন্ট ব্যথা, মাংসপেশির ব্যথা, কোমর ব্যথা থেকে ১৫-২০ দিনে স্থায়ী মুক্তি। ৭০০০+ সন্তুষ্ট গ্রাহক। ৩৭% ছাড়ে অর্ডার করুন।',
+  keywords: 'রুহাফিয়া, ব্যথা নিরাময়, প্রাকৃতিক তেল, জয়েন্ট ব্যথা, মাংসপেশির ব্যথা, কোমর ব্যথা, pain relief oil, ruhafiya',
+  author: 'Ruhafiya',
+  robots: 'index, follow',
+  language: 'bn',
+  openGraph: {
+    title: 'রুহাফিয়া - পেইন রিমুভ অয়েল',
+    description: 'জয়েন্ট ব্যথা, মাংসপেশির ব্যথা থেকে ১৫-২০ দিনে স্থায়ী মুক্তি। ৭০০০+ সন্তুষ্ট গ্রাহক।',
+    url: 'https://ruhafiya.com',
+    siteName: 'Ruhafiya',
+    locale: 'bn_BD',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'রুহাফিয়া - পেইন রিমুভ অয়েল',
+    description: 'জয়েন্ট ব্যথা, মাংসপেশির ব্যথা থেকে ১৫-২০ দিনে স্থায়ী মুক্তি।',
+  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
+function AlertDialog() {
+  return (
+    <Suspense fallback={null}>
+      <div id="alert-dialog-root" />
+    </Suspense>
+  );
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="bn" suppressHydrationWarning={true}>
+    <html lang="bn">
       <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        {/* Google Tag Manager */}
-        {process.env.NEXT_PUBLIC_GTM_ID ? (
-          <Script id="gtm" strategy="afterInteractive">
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+        <link rel="canonical" href="https://ruhafiya.com" />
+        
+        {/* Additional SEO Meta Tags */}
+        <meta name="google-site-verification" content="your-google-verification-code" />
+        <meta name="msvalidate.01" content="your-bing-verification-code" />
+        <meta name="geo.region" content="BD" />
+        <meta name="geo.country" content="Bangladesh" />
+        <meta name="geo.placename" content="Dhaka, Bangladesh" />
+        <meta name="distribution" content="global" />
+        <meta name="rating" content="general" />
+        <meta name="revisit-after" content="7 days" />
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://img.youtube.com" />
+        <link rel="preload" href="/logo.png" as="image" type="image/png" fetchPriority="high" />
+        <link rel="preload" as="style" href="/_next/static/css/app/layout.css" />
+        <link rel="modulepreload" href="/_next/static/chunks/main.js" />
+        <meta name="theme-color" content="#16a34a" />
+
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Ruhafiya",
+              "alternateName": "রুহাফিয়া",
+              "url": "https://ruhafiya.com",
+              "logo": "https://ruhafiya.com/logo.png",
+              "description": "রুহাফিয়া প্রাকৃতিক ব্যথা নিরাময়ের তেল। জয়েন্ট ব্যথা, মাংসপেশির ব্যথা থেকে ১৫-৩০ দিনে স্থায়ী মুক্তি।",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "BD",
+                "addressRegion": "Dhaka"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "availableLanguage": ["Bengali", "English"]
+              },
+              "sameAs": [
+                "https://www.facebook.com/ruhafiya",
+                "https://www.youtube.com/ruhafiya"
+              ]
+            })
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "রুহাফিয়া ব্যথা নিরাময়ের তেল",
+              "description": "প্রাকৃতিক ব্যথা নিরাময়ের তেল। জয়েন্ট ব্যথা, মাংসপেশির ব্যথা থেকে ১৫-৩০ দিনে স্থায়ী মুক্তি।",
+              "brand": {
+                "@type": "Brand",
+                "name": "Ruhafiya"
+              },
+              "category": "Health & Wellness",
+              "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "priceCurrency": "BDT",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "Ruhafiya"
+                }
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "5000"
+              }
+            })
+          }}
+        />
+
+        {/* Minimal inline CSS */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            body{font-family:var(--font-hind-siliguri),system-ui,sans-serif;margin:0;line-height:1.5}
+            .container{max-width:1024px;margin:0 auto;padding:0 1rem}
+            .grid{display:grid}
+            .flex{display:flex}
+            .items-center{align-items:center}
+            .justify-center{justify-content:center}
+            .bg-gradient-to-br{background:linear-gradient(135deg,#f0fdf4,#dcfce7)}
+            .text-4xl{font-size:2.25rem;font-weight:700;color:#111827;line-height:1.25}
+            .text-xl{font-size:1.25rem;color:#374151;line-height:1.625}
+            .bg-green-600{background:#16a34a;color:#fff;padding:1rem 2rem;border-radius:9999px;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
+            .py-16{padding:4rem 0}
+            .space-y-8>*+*{margin-top:2rem}
+            .space-y-4>*+*{margin-top:1rem}
+            @media(min-width:1024px){.lg\\:grid-cols-2{grid-template-columns:1fr 1fr;gap:3rem;align-items:center}}
+          `
+        }} />
+      </head>
+      <body className={`${hindSiliguri.variable} font-sans`} suppressHydrationWarning>
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-green-600 text-white px-4 py-2 rounded z-50">
+          Skip to main content
+        </a>
+        {children}
+        <AlertDialog />
+
+        {/* Analytics */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <Script id="gtm" strategy="lazyOnload">
             {`
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -27,10 +173,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');
             `}
           </Script>
-        ) : null}
-        {/* Facebook Pixel */}
-        {process.env.NEXT_PUBLIC_FB_PIXEL_ID ? (
-          <Script id="fb-pixel" strategy="afterInteractive">
+        )}
+
+        {process.env.NEXT_PUBLIC_FB_PIXEL_ID && (
+          <Script id="fb-pixel" strategy="lazyOnload">
             {`
               !function(f,b,e,v,n,t,s)
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -44,18 +190,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               fbq('track', 'PageView');
             `}
           </Script>
-        ) : null}
-      </head>
-      <body className={`${hindSiliguri.variable} font-sans`}>
-        {/* Google Tag Manager (noscript) */}
-        {process.env.NEXT_PUBLIC_GTM_ID ? (
+        )}
+
+        {/* Noscript fallbacks */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
           <noscript>
             <iframe src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
               height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe>
           </noscript>
-        ) : null}
-        {/* Facebook Pixel (noscript) */}
-        {process.env.NEXT_PUBLIC_FB_PIXEL_ID ? (
+        )}
+        {process.env.NEXT_PUBLIC_FB_PIXEL_ID && (
           <noscript>
             <img
               height="1"
@@ -65,13 +209,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               alt=""
             />
           </noscript>
-        ) : null}
-        {children}
-
-        {/* Alert Dialog System */}
-        <AlertDialog />
+        )}
       </body>
     </html>
   );
 }
-

@@ -2,37 +2,127 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+@layer utilities {
+  /* Custom scrollbar - only load when needed */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #16a34a;
+    border-radius: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #15803d;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #16a34a;
-  border-radius: 4px;
-}
+  /* Hide scrollbars utility */
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #15803d;
-}
+  /* Accessibility improvements */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
-/* Smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
-}
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
 
-/* Utility: hide scrollbars for targeted containers */
-.scrollbar-hide {
-  /* Firefox */
-  scrollbar-width: none;
-  /* IE/Edge */
-  -ms-overflow-style: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .bg-green-600 {
+      background-color: #059669;
+    }
+    
+    .text-green-600 {
+      color: #047857;
+    }
+    
+    .border-green-600 {
+      border-color: #047857;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .transition-all,
+    .transition-colors,
+    .transition-transform {
+      transition: none;
+    }
+    
+    .animate-spin {
+      animation: none;
+    }
+    
+    .group-hover\:scale-110:hover {
+      transform: none;
+    }
+  }
+
+  /* Performance optimizations */
+  .lazy-sections {
+    contain: layout style paint;
+  }
+
+  /* Optimize animations */
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* GPU acceleration for smooth animations */
+  .transition-transform,
+  .group-hover\:scale-110 {
+    will-change: transform;
+    transform: translateZ(0);
+  }
 }

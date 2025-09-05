@@ -1,0 +1,27 @@
+{
+  "name": "Ruhafiya - Pain Remove Oil",
+  "short_name": "Ruhafiya",
+  "description": "Premium quality pain relief oil with advanced fraud protection and fast delivery",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "health"],
+  "lang": "bn",
+  "dir": "ltr"
+}

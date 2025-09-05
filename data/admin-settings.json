@@ -1,0 +1,62 @@
+{
+  "general": {
+    "siteName": "Ruhafiya",
+    "siteDescription": "Premium Quality Products",
+    "contactEmail": "info@ruhafiya.com",
+    "supportPhone": "+880-123-456789",
+    "currency": "BDT",
+    "timezone": "Asia/Dhaka",
+    "language": "bn",
+    "maintenanceMode": false,
+    "allowRegistration": true
+  },
+  "store": {
+    "orderPrefix": "RUH",
+    "minOrderAmount": 100,
+    "maxOrderAmount": 50000,
+    "shippingFee": 60,
+    "freeShippingThreshold": 1000,
+    "taxRate": 0,
+    "processingTime": "1-2 business days",
+    "returnPolicy": "7 days return policy",
+    "autoConfirmOrders": false
+  },
+  "notifications": {
+    "emailNotifications": true,
+    "smsNotifications": false,
+    "orderStatusUpdates": true,
+    "lowStockAlerts": true,
+    "dailyReports": false,
+    "weeklyReports": true,
+    "newOrderAlert": true,
+    "customerMessages": true
+  },
+  "security": {
+    "sessionTimeout": 30,
+    "maxLoginAttempts": 5,
+    "requireStrongPasswords": true,
+    "twoFactorAuth": false,
+    "ipWhitelist": [],
+    "autoLogoutTime": 60,
+    "passwordExpiry": 90
+  },
+  "integrations": {
+    "facebookPixel": "",
+    "googleAnalytics": "",
+    "googleTagManager": "",
+    "whatsappNumber": "",
+    "messengerPageId": "",
+    "paymentGateway": "manual",
+    "smsProvider": "none"
+  },
+  "appearance": {
+    "theme": "light",
+    "primaryColor": "#059669",
+    "secondaryColor": "#10b981",
+    "logoUrl": "/logo.png",
+    "faviconUrl": "/favicon.png",
+    "customCSS": "",
+    "headerScript": "",
+    "footerScript": ""
+  }
+}

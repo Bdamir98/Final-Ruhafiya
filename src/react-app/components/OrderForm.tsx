@@ -267,7 +267,7 @@ export default function OrderForm() {
     <section id="order-form" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <div className="inline-block bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <div className="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
             {orderForm.tag}
           </div>
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -304,16 +304,18 @@ export default function OrderForm() {
                           <div className="flex items-center space-x-3">
                             <input
                               type="radio"
+                              id={`package-${pkg.id}`}
                               name="package"
                               value={pkg.id}
                               checked={selectedPackage === pkg.id}
                               onChange={() => handleSelectPackage(pkg)}
-                              className="w-5 h-5   text-green-600"
+                              aria-label={`${pkg.name} - ${pkg.price} টাকা`}
+                              className="w-5 h-5 text-green-600"
                             />
                             <div>
                               <h4 className="font-bold text-gray-900">{pkg.name}</h4>
                               {pkg.savings && (
-                                <span className="text-sm font-bold text-green-600 ">
+                                <span className="text-sm font-bold text-green-700">
                                   {pkg.savings}
                                 </span>
                               )}
@@ -342,24 +344,31 @@ export default function OrderForm() {
                   <div className="space-y-4">
                     {orderForm.formFields.map((field) => (
                       <div key={field.name}>
+                        <label htmlFor={field.name} className="block text-sm font-semibold text-gray-700 mb-2">
+                          {field.placeholder}
+                        </label>
                         {field.name === 'fullAddress' ? (
                           <textarea
+                            id={field.name}
                             name={field.name}
                             placeholder={field.placeholder}
                             value={formData[field.name as keyof typeof formData]}
                             onChange={handleInputChange}
                             required
                             rows={3}
+                            aria-label={field.placeholder}
                             className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                           />
                         ) : (
                           <input
+                            id={field.name}
                             type={field.type}
                             name={field.name}
                             placeholder={field.placeholder}
                             value={formData[field.name as keyof typeof formData]}
                             onChange={handleInputChange}
                             required
+                            aria-label={field.placeholder}
                             className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                           />
                         )}

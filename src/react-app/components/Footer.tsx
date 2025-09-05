@@ -47,7 +47,7 @@ export default function Footer() {
           <div className="flex justify-center gap-10">
             {/* Quick Links */}
             <div className="space-y-3 min-w-[42%] text-left">
-              <h4 className="text-base font-semibold">{footer.quickLinks.title}</h4>
+              <h2 className="text-base font-semibold">{footer.quickLinks.title}</h2>
               <ul className="space-y-2">
                 {footer.quickLinks.links.map((link, index) => (
                   <li key={index}>
@@ -61,7 +61,7 @@ export default function Footer() {
 
             {/* Contact */}
             <div className="space-y-3 min-w-[42%] text-left">
-              <h4 className="text-base font-semibold">যোগাযোগ করুন</h4>
+              <h2 className="text-base font-semibold">যোগাযোগ করুন</h2>
               <ul className="space-y-2 text-gray-300">
                 <li className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-green-500" />
@@ -113,7 +113,7 @@ export default function Footer() {
 
           {/* Social centered below */}
           <div className="text-center">
-            <h4 className="text-base font-semibold mb-3">{footer.social.title}</h4>
+            <h2 className="text-base font-semibold mb-3">{footer.social.title}</h2>
             <div className="flex justify-center gap-4">
               {footer.social.links.map((social, index) => {
                 const IconComponent = socialIcons[social.icon as keyof typeof socialIcons];
@@ -123,6 +123,7 @@ export default function Footer() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Visit our ${social.name} page`}
                     onClick={() => {
                       fbqSafe('track', 'Contact', {
                         content_name: `${social.name} Social Media`,
@@ -135,9 +136,9 @@ export default function Footer() {
                         social_target: social.url
                       });
                     }}
-                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
+                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors focus:outline-none focus:ring-4 focus:ring-green-300"
                   >
-                    <IconComponent className="w-5 h-5" />
+                    <IconComponent className="w-5 h-5" aria-hidden="true" />
                   </a>
                 );
               })}
@@ -149,9 +150,9 @@ export default function Footer() {
         <div className="hidden md:grid md:grid-cols-4 gap-8 mb-8">
           {/* Logo and About */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-green-400">
+            <h2 className="text-2xl font-bold text-green-400">
               {footer.logo.text}
-            </h3>
+            </h2>
             <p className="text-gray-300 leading-relaxed">
               {footer.about}
             </p>
@@ -159,9 +160,9 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">
+            <h3 className="text-lg font-semibold">
               {footer.quickLinks.title}
-            </h4>
+            </h3>
             <ul className="space-y-2">
               {footer.quickLinks.links.map((link, index) => (
                 <li key={index}>
@@ -178,9 +179,9 @@ export default function Footer() {
 
           {/* Social Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">
+            <h3 className="text-lg font-semibold">
               {footer.social.title}
-            </h4>
+            </h3>
             <div className="flex space-x-4">
               {footer.social.links.map((social, index) => {
                 const IconComponent = socialIcons[social.icon as keyof typeof socialIcons];
@@ -190,6 +191,7 @@ export default function Footer() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Visit our ${social.name} page`}
                     onClick={() => {
                       fbqSafe('track', 'Contact', {
                         content_name: `${social.name} Social Media`,
@@ -202,9 +204,9 @@ export default function Footer() {
                         social_target: social.url
                       });
                     }}
-                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"
+                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors focus:outline-none focus:ring-4 focus:ring-green-300"
                   >
-                    <IconComponent className="w-5 h-5" />
+                    <IconComponent className="w-5 h-5" aria-hidden="true" />
                   </a>
                 );
               })}
@@ -213,7 +215,7 @@ export default function Footer() {
 
           {/* Contact Section */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">যোগাযোগ করুন</h4>
+            <h3 className="text-lg font-semibold">যোগাযোগ করুন</h3>
             <ul className="space-y-3 text-gray-300">
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 mt-0.5 text-green-500" />

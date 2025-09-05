@@ -1,0 +1,60 @@
+{
+  "detection": {
+    "enabled": true,
+    "autoBlock": false,
+    "scoreThreshold": 70,
+    "duplicateOrderWindow": 30,
+    "maxOrdersPerHour": 5,
+    "maxOrdersPerDay": 20
+  },
+  "rules": {
+    "duplicatePhone": {
+      "enabled": true,
+      "weight": 25
+    },
+    "duplicateAddress": {
+      "enabled": true,
+      "weight": 20
+    },
+    "rapidOrders": {
+      "enabled": true,
+      "weight": 30
+    },
+    "suspiciousPatterns": {
+      "enabled": true,
+      "weight": 15
+    },
+    "invalidPhone": {
+      "enabled": true,
+      "weight": 35
+    },
+    "vpnDetection": {
+      "enabled": true,
+      "weight": 20
+    },
+    "deviceFingerprint": {
+      "enabled": true,
+      "weight": 15
+    }
+  },
+  "notifications": {
+    "emailAlerts": true,
+    "adminEmail": "admin@ruhafiya.com",
+    "slackWebhook": "",
+    "realTimeAlerts": true
+  },
+  "whitelist": {
+    "trustedPhones": [],
+    "trustedIPs": [],
+    "trustedDevices": []
+  },
+  "blacklist": {
+    "blockedPhones": [],
+    "blockedIPs": [],
+    "blockedKeywords": [
+      "test",
+      "fake",
+      "spam"
+    ]
+  }
+}
