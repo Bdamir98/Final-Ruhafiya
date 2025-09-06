@@ -99,6 +99,9 @@ const nextConfig = {
     scrollRestoration: true,
   },
   
+  // Source maps for production (helps with debugging and performance audit)
+  productionBrowserSourceMaps: true,
+  
   // Webpack optimizations
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {

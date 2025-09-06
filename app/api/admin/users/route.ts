@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { supabaseServer } from '@/lib/supabase-server';
-import { createUserNotification } from '@/lib/notifications';
+import { supabaseServer } from '@/lib/database/supabase-server';
+import { createUserNotification } from '@/lib/utils/notifications';
 
 const UserSchema = z.object({
   email: z.string().email(),

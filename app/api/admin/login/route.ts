@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { supabaseServer } from '@/lib/supabase-server';
+import { supabaseServer } from '@/lib/database/supabase-server';
 // Password verification is done in Postgres using pgcrypto's crypt() via RPC
 
 const LoginSchema = z.object({

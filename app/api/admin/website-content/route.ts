@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { supabaseServer } from '@/lib/supabase-server';
+import { supabaseServer } from '@/lib/database/supabase-server';
 
 const PutSchema = z.object({
   content: z.record(z.any()), // arbitrary JSON

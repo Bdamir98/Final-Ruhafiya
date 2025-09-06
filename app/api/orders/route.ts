@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { supabaseServer } from '@/lib/supabase-server';
-import { OrderSchema } from '@/shared/types';
-import { createOrderNotification } from '@/lib/notifications';
-import { createHash } from 'crypto';
+import { supabaseServer } from '@/lib/database/supabase-server';
+import { OrderSchema } from '@/types/types';
+import { createOrderNotification } from '@/lib/utils/notifications';
 
 export async function POST(req: NextRequest) {
   try {
@@ -92,44 +91,6 @@ export async function POST(req: NextRequest) {
 
     // Create notification
     await createOrderNotification(order, existingCustomer, isNewCustomer);
-
-    // Facebook Conversion API
-    const hash = (data: string) => createHash('sha256').update(data).digest('hex');
-    if (process.env.NEXT_PUBLIC_FB_PIXEL_ID && process.env.FB_ACCESS_TOKEN) {
-      try {
-        const pixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
-        const accessToken = process.env.FB_ACCESS_TOKEN;
-        const userData = {
-          ph: hash(orderData.mobileNumber.replace(/\D/g, '')), // hashed phone
-        };
-        const eventData = {
-          event_name: 'Purchase',
-          event_time: Math.floor(Date.now() / 1000),
-          action_source: 'website',
-          event_source_url: process.env.NEXT_PUBLIC_SITE_URL || 'https://ruhafiya.com',
-          user_data: userData,
-          custom_data: {
-            value: totalAmount,
-            currency: 'BDT',
-            content_name: 'Pain Relief Oil',
-            content_type: 'product',
-          },
-        };
-        const response = await fetch(`https://graph.facebook.com/v18.0/${pixelId}/events`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            access_token: accessToken,
-            data: [eventData],
-          }),
-        });
-        if (!response.ok) {
-          console.error('FB CAPI error:', await response.text());
-        }
-      } catch (error) {
-        console.error('FB CAPI failed:', error);
-      }
-    }
 
     return NextResponse.json({
       orderNumber,

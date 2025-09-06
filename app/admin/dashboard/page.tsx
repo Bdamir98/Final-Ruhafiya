@@ -1,4 +1,4 @@
-import AdminDashboard from '@/react-app/pages/AdminDashboard';
+import AdminDashboard from '@/components/admin/dashboard/AdminDashboard';
 
 export default function Page() {
   return <AdminDashboard />;

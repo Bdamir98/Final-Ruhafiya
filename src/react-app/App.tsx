@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router";
-import HomePage from "@/react-app/pages/Home";
-import AdminLogin from "@/react-app/pages/AdminLogin";
-import AdminDashboard from "@/react-app/pages/AdminDashboard";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "../components/sections/Home";
+import AdminLogin from "../components/admin/dashboard/AdminLogin";
+import AdminDashboard from "../components/admin/dashboard/AdminDashboard";
 
 export default function App() {
   return (

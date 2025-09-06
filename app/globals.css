@@ -125,4 +125,22 @@
     will-change: transform;
     transform: translateZ(0);
   }
+
+  /* Bangla number font styling */
+  .bangla-number-font {
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif !important;
+    font-feature-settings: 'tnum' 1; /* Use tabular numbers for consistent spacing */
+  }
+
+  /* Auto-detect and style Bangla numbers */
+  .bangla-text {
+    font-family: inherit;
+  }
+
+  /* Specific styling for Bangla numbers within text */
+  .bangla-text .bangla-number {
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif !important;
+    font-feature-settings: 'tnum' 1;
+    display: inline;
+  }
 }

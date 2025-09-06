@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabaseServer } from '@/lib/supabase-server';
+import { supabaseServer } from '@/lib/database/supabase-server';
 
 export async function PATCH(_: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id: idParam } = await params;

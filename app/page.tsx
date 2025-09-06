@@ -1,4 +1,4 @@
-import Home from '../src/react-app/pages/Home';
+import Home from '@/components/sections/Home';
 
 export default function Page() {
   return <Home />;

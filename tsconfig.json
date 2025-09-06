@@ -21,6 +21,21 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/lib/*": [
+        "src/lib/*"
+      ],
+      "@/types/*": [
+        "src/types/*"
+      ],
+      "@/config/*": [
+        "src/config/*"
+      ],
+      "@/constants/*": [
+        "src/constants/*"
       ]
     },
     "types": [
@@ -43,7 +58,6 @@
     "src/worker/**",
     "vite.config.ts",
     "wrangler.jsonc",
-    "src/react-app/main.tsx",
-    "src/react-app/App.tsx"
+    "src/react-app/**"
   ]
 }

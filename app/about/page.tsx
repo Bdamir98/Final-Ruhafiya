@@ -1,4 +1,4 @@
-import { websiteContent } from '@/shared/websiteContent';
+import { websiteContent } from '@/config/websiteContent';
 
 export const metadata = {
   title: 'আমাদের সম্পর্কে | Ruhafiya',

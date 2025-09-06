@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { supabaseServer } from '@/lib/supabase-server';
-import { createProductNotification } from '@/lib/notifications';
+import { supabaseServer } from '@/lib/database/supabase-server';
+import { createProductNotification } from '@/lib/utils/notifications';
 
 const ProductUpdateSchema = z.object({
   name: z.string().min(1).optional(),

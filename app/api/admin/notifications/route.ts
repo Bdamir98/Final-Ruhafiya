@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { supabaseServer } from '@/lib/supabase-server';
+import { supabaseServer } from '@/lib/database/supabase-server';
 
 const CreateSchema = z.object({
   type: z.string().min(1),
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
     const { data, error, count } = await query.range(from, to);
     if (error) throw error;
 
-    console.log('Notifications fetched:', data?.length || 0); // Debug log
+
 
     return NextResponse.json({ notifications: data ?? [], total: count ?? 0, page, pageSize });
   } catch (e) {
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       .single();
 
     if (error) throw error;
-    console.log('Notification created:', data); // Debug log
+
     return NextResponse.json({ notification: data });
   } catch (e) {
     if (e instanceof z.ZodError) {
