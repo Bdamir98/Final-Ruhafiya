@@ -3,8 +3,7 @@ import { Suspense, lazy } from 'react';
 import { ContentProvider } from '../components/ContentProvider';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import PerformanceWrapper from '../components/PerformanceWrapper';
-import ErrorBoundary, { SafeLazyWrapper } from '../components/ErrorBoundary';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 // Lazy load components that are below the fold
 const Benefits = lazy(() => 
@@ -60,50 +59,49 @@ export default function Home() {
           
           <div className="lazy-sections">
             <ErrorBoundary fallback={<SectionLoader />}>
-              <PerformanceWrapper delay={200} fallback={<SectionLoader />}>
+              <Suspense fallback={<SectionLoader />}>
                 <Benefits />
-              </PerformanceWrapper>
+              </Suspense>
             </ErrorBoundary>
             
             <ErrorBoundary fallback={<SectionLoader />}>
-              <PerformanceWrapper delay={400} fallback={<SectionLoader />}>
+              <Suspense fallback={<SectionLoader />}>
                 <Offer />
-              </PerformanceWrapper>
+              </Suspense>
             </ErrorBoundary>
             
             <ErrorBoundary fallback={<SectionLoader />}>
-              <PerformanceWrapper delay={600} fallback={<SectionLoader />}>
+              <Suspense fallback={<SectionLoader />}>
                 <Testimonials />
-              </PerformanceWrapper>
+              </Suspense>
             </ErrorBoundary>
             
             <ErrorBoundary fallback={<SectionLoader />}>
-              <PerformanceWrapper delay={800} fallback={<SectionLoader />}>
+              <Suspense fallback={<SectionLoader />}>
                 <Safety />
-              </PerformanceWrapper>
+              </Suspense>
             </ErrorBoundary>
             
             <ErrorBoundary fallback={<SectionLoader />}>
-              <PerformanceWrapper delay={1000} fallback={<SectionLoader />}>
+              <Suspense fallback={<SectionLoader />}>
                 <OrderForm />
-              </PerformanceWrapper>
+              </Suspense>
             </ErrorBoundary>
             
             <ErrorBoundary fallback={<SectionLoader />}>
-              <PerformanceWrapper delay={1200} fallback={<SectionLoader />}>
+              <Suspense fallback={<SectionLoader />}>
                 <PaymentOptions />
-              </PerformanceWrapper>
+              </Suspense>
             </ErrorBoundary>
           </div>
         </main>
         
         <ErrorBoundary fallback={<SectionLoader />}>
-          <PerformanceWrapper delay={1400} fallback={<SectionLoader />}>
+          <Suspense fallback={<SectionLoader />}>
             <Footer />
-          </PerformanceWrapper>
+          </Suspense>
         </ErrorBoundary>
       </div>
     </ContentProvider>
   );
 }
-

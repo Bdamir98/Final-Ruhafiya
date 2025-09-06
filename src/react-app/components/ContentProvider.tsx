@@ -111,14 +111,15 @@ export const ContentProvider: React.FC<ContentProviderProps> = ({ children }) =>
 
   // Completely skip all fetching in production for maximum performance
   useEffect(() => {
-    // Only fetch in development
+    // Only fetch in development, skip entirely in production
     if (process.env.NODE_ENV === 'development') {
       // Delay initial fetch significantly to not block rendering
       const timer = setTimeout(() => {
         fetchContent();
-      }, 2000);
+      }, 5000); // Increased delay to 5 seconds
       return () => clearTimeout(timer);
     }
+    // In production, just use static content without any fetching
   }, []);
 
   const value: ContentContextType = useMemo(() => ({

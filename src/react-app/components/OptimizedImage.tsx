@@ -98,7 +98,13 @@ export default function OptimizedImage({
     // Mobile-optimized sizes
     const mobileSizes = sizes || '(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 50vw, 33vw';
 
-    const imageProps = {
+    // Ensure mutually exclusive props: priority and loading cannot coexist
+    // Create safe props object that excludes any potential priority/loading conflicts
+    const safeProps = Object.fromEntries(
+        Object.entries(props).filter(([key]) => key !== 'priority' && key !== 'loading')
+    );
+    
+    const baseProps = {
         src,
         alt,
         className: `${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300 ease-in-out`,
@@ -107,11 +113,14 @@ export default function OptimizedImage({
         quality: quality,
         placeholder: placeholder as any,
         blurDataURL: blurDataURL || defaultBlurDataURL,
-        priority,
         sizes: mobileSizes,
-        loading: loading as any,
-        ...props,
+        ...safeProps,
     };
+
+    // Add priority or loading prop, but never both
+    const imageProps = priority 
+        ? { ...baseProps, priority: true }
+        : { ...baseProps, loading: loading as any };
 
     // Don't render image until it should load (for non-priority images)
     if (!shouldLoad && !priority) {

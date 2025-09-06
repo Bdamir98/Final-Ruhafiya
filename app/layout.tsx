@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { Hind_Siliguri } from 'next/font/google';
 import Script from 'next/script';
 import { Suspense } from 'react';
+// Temporarily disabled for debugging
+// import PerformanceMonitor from '@/react-app/components/PerformanceMonitor';
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ['latin', 'bengali'],
@@ -13,14 +15,14 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata = {
-  title: 'রুহাফিয়া - পেইন রিমুভ অয়েল | ১৫-২০ দিনে ব্যথা থেকে মুক্তি',
-  description: 'রুহাফিয়া পেইন রিমুভ অয়েল। জয়েন্ট ব্যথা, মাংসপেশির ব্যথা, কোমর ব্যথা থেকে ১৫-২০ দিনে স্থায়ী মুক্তি। ৭০০০+ সন্তুষ্ট গ্রাহক। ৩৭% ছাড়ে অর্ডার করুন।',
+  title: 'রুহাফিয়া - পেইন রিমুভ অয়েল | ১৫-২০ দিনে ব্যথা থেকে মুক্তি',
+  description: 'রুহাফিয়া পেইন রিমুভ অয়েল। জয়েন্ট ব্যথা, মাংসপেশির ব্যথা, কোমর ব্যথা থেকে ১৫-২০ দিনে স্থায়ী মুক্তি। ৭০০০+ সন্তুষ্ট গ্রাহক। ৩৭% ছাড়ে অর্ডার করুন।',
   keywords: 'রুহাফিয়া, ব্যথা নিরাময়, প্রাকৃতিক তেল, জয়েন্ট ব্যথা, মাংসপেশির ব্যথা, কোমর ব্যথা, pain relief oil, ruhafiya',
   author: 'Ruhafiya',
   robots: 'index, follow',
   language: 'bn',
   openGraph: {
-    title: 'রুহাফিয়া - পেইন রিমুভ অয়েল',
+    title: 'রুহাফিয়া - পেইন রিমুভ অয়েল',
     description: 'জয়েন্ট ব্যথা, মাংসপেশির ব্যথা থেকে ১৫-২০ দিনে স্থায়ী মুক্তি। ৭০০০+ সন্তুষ্ট গ্রাহক।',
     url: 'https://ruhafiya.com',
     siteName: 'Ruhafiya',
@@ -29,7 +31,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'রুহাফিয়া - পেইন রিমুভ অয়েল',
+    title: 'রুহাফিয়া - পেইন রিমুভ অয়েল',
     description: 'জয়েন্ট ব্যথা, মাংসপেশির ব্যথা থেকে ১৫-২০ দিনে স্থায়ী মুক্তি।',
   },
 };
@@ -66,12 +68,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Conditionally preload critical images only if they will be used immediately */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />
-        <link rel="preload" href="/logo.png" as="image" type="image/png" fetchPriority="high" />
-        <link rel="preload" as="style" href="/_next/static/css/app/layout.css" />
-        <link rel="modulepreload" href="/_next/static/chunks/main.js" />
         <meta name="theme-color" content="#16a34a" />
 
         {/* Structured Data for SEO */}
@@ -135,36 +135,32 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
 
-        {/* Minimal inline CSS */}
+        {/* Critical CSS - Optimized for Performance */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            body{font-family:var(--font-hind-siliguri),system-ui,sans-serif;margin:0;line-height:1.5}
+            body{font-family:var(--font-hind-siliguri),-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;margin:0;line-height:1.5;font-display:swap}
             .container{max-width:1024px;margin:0 auto;padding:0 1rem}
             .grid{display:grid}
             .flex{display:flex}
             .items-center{align-items:center}
             .justify-center{justify-content:center}
             .bg-gradient-to-br{background:linear-gradient(135deg,#f0fdf4,#dcfce7)}
-            .text-4xl{font-size:2.25rem;font-weight:700;color:#111827;line-height:1.25}
-            .text-xl{font-size:1.25rem;color:#374151;line-height:1.625}
-            .bg-green-600{background:#16a34a;color:#fff;padding:1rem 2rem;border-radius:9999px;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
-            .py-16{padding:4rem 0}
+            .text-4xl{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;color:#111827;line-height:1.25}
+            .text-xl{font-size:clamp(1rem,2.5vw,1.25rem);color:#374151;line-height:1.625}
+            .bg-green-600{background:#16a34a;color:#fff;padding:1rem 2rem;border-radius:9999px;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;will-change:transform}
+            .py-16{padding:clamp(2rem,8vw,4rem) 0}
             .space-y-8>*+*{margin-top:2rem}
             .space-y-4>*+*{margin-top:1rem}
+            .lazy-load{opacity:0;transition:opacity .3s ease}
+            .lazy-loaded{opacity:1}
             @media(min-width:1024px){.lg\\:grid-cols-2{grid-template-columns:1fr 1fr;gap:3rem;align-items:center}}
+            @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
           `
         }} />
-      </head>
-      <body className={`${hindSiliguri.variable} font-sans`} suppressHydrationWarning>
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-green-600 text-white px-4 py-2 rounded z-50">
-          Skip to main content
-        </a>
-        {children}
-        <AlertDialog />
 
-        {/* Analytics */}
+        {/* Analytics - Optimized Loading */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
-          <Script id="gtm" strategy="lazyOnload">
+          <Script id="gtm" strategy="afterInteractive">
             {`
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -176,7 +172,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         )}
 
         {process.env.NEXT_PUBLIC_FB_PIXEL_ID && (
-          <Script id="fb-pixel" strategy="lazyOnload">
+          <Script id="fb-pixel" strategy="afterInteractive">
             {`
               !function(f,b,e,v,n,t,s)
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -210,6 +206,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             />
           </noscript>
         )}
+      </head>
+      <body className={`${hindSiliguri.variable} font-sans`} suppressHydrationWarning>
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-green-600 text-white px-4 py-2 rounded z-50">
+          Skip to main content
+        </a>
+        {children}
+        <AlertDialog />
+        {/* Temporarily disabled for debugging */}
+        {/* <PerformanceMonitor /> */}
+
       </body>
     </html>
   );
