@@ -50,23 +50,19 @@ export default function Safety() {
             </a>
           </div>
           
-          <div className="relative">
-            <div className="bg-white rounded-2xl shadow-2xl p-8 text-center">
-              <div className="w-32 h-32 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
-                <Award className="w-16 h-16 text-green-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                BCSIR সার্টিফিকেট
-              </h3>
-              <p className="text-gray-600">
-                বাংলাদেশ বিজ্ঞান ও শিল্প গবেষণা পরিষদ কর্তৃক অনুমোদিত
-              </p>
-            </div>
-            
-            <div className="absolute -top-4 -right-4 bg-green-500 text-white p-3 rounded-full">
-              <Shield className="w-6 h-6" />
-            </div>
-          </div>
+          <div className="relative w-100 h-100 mx-auto">
+  <img 
+    src="/bcsir.jpg" 
+    alt="BCSIR Certificate" 
+    className="w-full h-full object-contain rounded-lg"
+  />
+  
+  <div className="absolute -top-4 -right-4 bg-green-500 text-white p-3 rounded-full">
+    <Shield className="w-6 h-6" />
+  </div>
+</div>
+
+
         </div>
       </div>
     </section>

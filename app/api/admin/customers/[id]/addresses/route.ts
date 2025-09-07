@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseServer } from '@/lib/database/supabase-server';
+import { logger } from '@/lib/utils/logger';
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -13,7 +14,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
     if (error) throw error;
     return NextResponse.json({ addresses });
   } catch (e) {
-    console.error('Failed to fetch customer addresses:', e);
+    logger.error('Failed to fetch customer addresses:', e);
     return NextResponse.json(
       { error: 'Failed to fetch customer addresses' },
       { status: 500 }
