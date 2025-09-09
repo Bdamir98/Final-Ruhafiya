@@ -242,7 +242,7 @@ export default function OrderForm() {
                 </button>
                 
                 <p className="text-center text-xl font-bold text-gray-600">
-                  {orderForm.confirmButton.subtext}
+                  <BanglaText>{orderForm.confirmButton.subtext}</BanglaText>
                 </p>
               </form>
             </div>
